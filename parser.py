@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
 import requests
 def Proxy ():
     a=pars()
@@ -14,11 +13,13 @@ def Proxy ():
 
 def  pars ():
     url = 'http://www.gatherproxy.com/ru/sockslist'
+    r= requests.get(url)
     lis = [ (i*7)+2 for i  in  range(0,24)]
 
     try:
 
-     soup = BeautifulSoup(urlopen(url).read(), 'html.parser')
+
+     soup = BeautifulSoup(r.text, 'html.parser')
     except:
         return 0
 
@@ -34,4 +35,6 @@ def  pars ():
           port = port[53:60].replace("')","").replace("<","")
           ip_list.append (f"soks5://{ip}:{port}")
     return ip_list
+
+
 
