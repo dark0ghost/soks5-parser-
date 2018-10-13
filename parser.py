@@ -3,44 +3,31 @@ import requests
 def Proxy (type):
 
   if type == "socks":
-    if str( requests.get('http://www.gatherproxy.com/ru/sockslist')) == '<Response [200]>':
-      a=pars()
-      for i in a:
-         a = {'http':i}
-         try:
-           requests.get("http://api.telegram.org", proxies= a)
-           return i
-         except:
-            continue
 
-    elif str(requests.get("http://free-proxy.cz/ru/")) == '<Response [200]>':
+
+    if str( requests.get('http://www.gatherproxy.com/ru/sockslist')) == "<Response [200]>":
+        a=pars()
+        for i in a:
+           a = {'http':i}
+           try:
+             requests.get("https://www.google.ru", proxies= a)
+             return i
+           except:
+              continue
+
+
+
+    if str(requests.get("https://www.socks-proxy.net/")) == "<Response [200]>":
+         
          a = pars2()
          for i in a:
              a = {'http': i}
              try:
-                 requests.get("http://api.telegram.org", proxies=a)
+                 requests.get("https://www.google.ru", proxies=a)
                  return i
              except:
                  Proxy(type)
-                 continue
 
-    elif str(requests.get("https://www.socks-proxy.net/")) == '<Response [200]>' :
-         print('true')
-         a = pars3()
-         for i in a:
-             a = {'http': i}
-             try:
-                 requests.get("http://api.telegram.org", proxies=a)
-                 return i
-             except:
-                 Proxy(type)
-    else:
-        ip ='45.77.59.101'
-        port = '10080'
-        login = 'teleForever_user'
-        por = 'frg45yFgg4l'
-        proxy = [{"ip":ip},{"port":port},{"login":login},{"password":por}]
-        return proxy
   elif type == "http":
       pass
 
@@ -66,27 +53,9 @@ def  pars ():
      return ip_list
     except:
         pass
+
+
 def pars2():
-    url = 'http://free-proxy.cz/ru/'
-    ip_list = []
-    try:
-     r = requests.get(url)
-     soup = BeautifulSoup(r.text, 'html.parser')
-     print("true")
-    except:
-        return 'error1'
-    try:
-     ip = soup.findAll('td',{'class':'left' })
-     port = soup.findAll('span',{'class':'fport' })
-     #for i in [i*11 for i in range(0,10)]:
-       #  pass
-     print(f"{ip} /n {port}")
-
-     return ip_list
-    except:
-        return 'error'
-
-def pars3():
     try:
         url = 'https://www.socks-proxy.net/'
         ip_list = []
@@ -100,11 +69,10 @@ def pars3():
 
         for i in [5, 192]:
             ips = str(ip)[i:i + 13].replace("<", "").replace("/", "").replace(">", "").replace("d", '').replace('t', "")
-            port = str(ip)[i + 24:i + 30].replace("<", "").replace("/", "").replace('t', '').replace(">", "")
+            port = str(ip)[i + 24:i + 30].replace("<", "").replace("/", "").replace('t', '').replace(">", "").replace("d","")
             ip_list.append(f"socks4://{ips}:{port}")
 
         return ip_list
 
     except:
        return  ' error'
-
