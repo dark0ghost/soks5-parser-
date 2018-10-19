@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import time
 
 
 def Proxy(type):
@@ -53,7 +54,9 @@ def pars2():
             ip_list.append(f"socks4://{ips}:{port}")
         return check_proxy(ip_list)
     except:
-        return ' error'
+        with open('log101.log','w') as f:
+           f.write(f"{time.ctime(time.time())}:pars")
+           f.close()
 
 
 def request(url):
@@ -62,7 +65,9 @@ def request(url):
         soup = BeautifulSoup(r.text, 'html.parser')
         return soup
     except:
-        pass
+        with open('log101.log', 'w') as f:
+          f.write(f"{time.ctime(time.time())}:req")
+          f.close()
 
 
 def check_proxy(list):
@@ -71,6 +76,8 @@ def check_proxy(list):
         try:
             requests.get("https://www.google.ru", proxies=a)
             return proxy
-            break
+            
         except:
-            continue
+             with open('log101.log', 'w') as f:
+              f.write(f" {time.ctime(time.time())}:chek", sep = '\n')
+              f.close()
