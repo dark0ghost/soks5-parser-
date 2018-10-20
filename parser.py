@@ -11,6 +11,8 @@ def Proxy(type):
             return pars2()
     elif type == "http":
         pass
+    else:
+        rerunt pars()
 
 
 def pars():
