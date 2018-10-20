@@ -12,7 +12,7 @@ def Proxy(type):
     elif type == "http":
         return http()
     else:
-        rerunt pars()
+        return pars()
 
 
 def pars():
