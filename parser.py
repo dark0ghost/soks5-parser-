@@ -10,7 +10,7 @@ def Proxy(type):
         if str(requests.get("https://www.socks-proxy.net/")) == "<Response [200]>":
             return pars2()
     elif type == "http":
-        pass
+        return http()
     else:
         rerunt pars()
 
@@ -83,3 +83,20 @@ def check_proxy(list):
              with open('log101.log', 'w') as f:
               f.write(f" {time.ctime(time.time())}:chek", sep = '\n')
               f.close()
+   
+
+def http():
+    url = "https://free.proxy-sale.com/?port%5B0%5D=http"
+    soup = request(url)
+    ip=str(soup.findAll('td',{'class':'bg-data'}))
+
+    ip_list = []
+    for i in [153,526,894]:
+        ips = ip[i:i+20]\
+            .replace('"','')\
+            .replace("\n",'')\
+            .replace("[p",'')\
+            .replace("o",'')
+        ip_list.append(ips)
+
+    return check_proxy( ip_list)
