@@ -6,16 +6,16 @@ import time
 def Proxy(type):
     if type == "socks":
         if str(requests.get('http://www.gatherproxy.com/ru/sockslist')) == "<Response [200]>":
-            return pars()
+            return  socks5()
         if str(requests.get("https://www.socks-proxy.net/")) == "<Response [200]>":
-            return pars2()
+            return  socks4()
     elif type == "http":
         return http()
     else:
-        return pars()
+        return  socks5()
 
 
-def pars():
+def  socks5():
     url = 'http://www.gatherproxy.com/ru/sockslist'
     lis = [(i * 7) + 2 for i in range(0, 24)]
     soup = request(url)
@@ -33,7 +33,7 @@ def pars():
     return check_proxy(ip_list)
 
 
-def pars2():
+def  socks4():
     try:
         url = 'https://www.socks-proxy.net/'
         ip_list = []
