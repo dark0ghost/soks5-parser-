@@ -29,7 +29,7 @@ def  socks5():
         port = str(tds[1].find_all('script'))
         ip = ip[53:67].replace("')", '').replace("'", '').replace('<', "")
         port = port[53:60].replace("')", "").replace("<", "")
-        ip_list.append(f"soks5://{ip}:{port}")
+        ip_list.append(f"socks5://{ip}:{port}")
     return check_proxy(ip_list)
 
 
