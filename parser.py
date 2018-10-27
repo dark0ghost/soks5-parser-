@@ -73,16 +73,20 @@ def request(url):
 
 
 def check_proxy(list):
-    for proxy in list:
-        a = {'http': proxy}
+    for i in list:
+        a = {'http://': i}
         try:
-            requests.get("https://www.google.ru", proxies=a)
-            return proxy
-            
+          print('оброботка прокси')
+          r = requests.get('http://api.telegram.org', proxies=a)
+          if r.status_code == 200:
+              return i
         except:
-             with open('log101.log', 'w') as f:
-              f.write(f" {time.ctime(time.time())}:chek", sep = '\n')
-              f.close()
+
+            print('не прошло:',i)
+            continue
+    else:
+        print('снова')
+        socks5()
    
 
 def http():
@@ -100,3 +104,40 @@ def http():
         ip_list.append(ips)
 
     return check_proxy( ip_list)
+def  socks_list():
+    url = 'http://www.gatherproxy.com/ru/sockslist'
+    lis = [(i * 7) + 2 for i in range(0, 24)]
+    soup = request(url)
+
+    td = soup.find('table', id='tblproxy').find_all('td')
+    p = []
+    ip_list = []
+    for i in lis:
+        tds = td[i:i + 2]
+        ip = str(tds[0].find_all('script'))
+        port = str(tds[1].find_all('script'))
+        ip = ip[53:67]\
+            .replace("')", '')\
+            .replace("'", '')\
+            .replace('<', "")
+        port = port[53:60]\
+            .replace("')", "")\
+            .replace("<", "")
+        ip_list.append(f"socks5://{ip}:{port}")
+
+    for g in ip_list:
+        a = {'http://': g}
+        try:
+          print('оброботка')
+          r = requests.get('http://api.telegram.org', proxies=a)
+          if r.status_code == 200:
+             p.append(g)
+        except:
+
+            print('не прошло:',i)
+            continue
+    else:
+        print('снова')
+        socks_list()
+
+    return p
