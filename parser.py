@@ -79,7 +79,7 @@ def check_proxy(list):
           print('оброботка прокси')
           r = requests.get('http://api.telegram.org', proxies=a)
           if r.status_code == 200:
-              return i
+              return str(i)
         except:
 
             print('не прошло:',i)
