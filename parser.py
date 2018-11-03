@@ -92,7 +92,7 @@ def check_proxy(list,type = 'NONE'):
     for i in list:
         a = {'http://': i}
         try:
-          print(f'оброботка  {time.ctime(time.time())}\n')
+          print(f'обработка  {time.ctime(time.time())}\n')
           r = requests.get('http://google.com',proxies = a)
           if r.status_code == 200:
            r = requests.get('http://api.telegram.org', proxies=a)
