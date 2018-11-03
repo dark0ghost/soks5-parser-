@@ -98,7 +98,7 @@ def check_proxy(list,type = 'NONE'):
            r = requests.get('http://api.telegram.org', proxies=a)
            if r.status_code == 200:
               return i
-        except:
+        except requests.exceptions.ConnectionError :
 
             print(f'не прошло: {i} {time.ctime(time.time())}\n')
             continue
