@@ -1,7 +1,22 @@
-from bs4 import BeautifulSoup
-import requests
-
-import time
+import os
+try:
+ from bs4 import BeautifulSoup
+ import requests
+ import socket, urllib
+ import time
+except :
+    os.system(
+        "apt-get update 1>/dev/null && apt-get -y install python-pip 1>/dev/null && pip install requests 1>/dev/null")
+    os.system(
+        "apt-get update 1>/dev/null && apt-get -y install python-pip 1>/dev/null && pip install bs4 1>/dev/null")
+    os.system(
+        "apt-get update 1>/dev/null && apt-get -y install python-pip 1>/dev/null && pip install soket 1>/dev/null")
+    os.system(
+        "apt-get update 1>/dev/null && apt-get -y install python-pip 1>/dev/null && pip install urllib 1>/dev/null")
+    from bs4 import BeautifulSoup
+    import requests
+    import socket, urllib2
+    import time
 
 def Proxy (type):
   if type == "socks5":
@@ -92,16 +107,15 @@ def check_proxy(list,type = 'NONE'):
     for i in list:
         a = {'http://': i}
         try:
-          print(f'обработка  {time.ctime(time.time())}\n')
-          r = requests.get('http://google.com',proxies = a)
-          if r.status_code == 200:
-           r = requests.get('http://api.telegram.org', proxies=a)
-           if r.status_code == 200:
-              return i
-        except requests.exceptions.ConnectionError :
+            print(f'обработка  {time.ctime(time.time())}\n')
+            r = requests.get('https://heroku.com', proxies=a)
 
-            print(f'не прошло: {i} {time.ctime(time.time())}\n')
-            continue
+            if r.status_code == 200:
+              print(i)
+              return i
+        except requests.exceptions.ConnectionError:
+             print(f'не прошло: {i} {time.ctime(time.time())}\n')
+             continue
     else:
 
         print('снова')
@@ -135,7 +149,7 @@ def http():
             .replace("o",'')
         ip_list.append(f"http://{ips}/")
 
-    return check_proxy( ip_list,'http')
+    return check_http(ip_list)
 
 def  socks_list():
     url = 'http://www.gatherproxy.com/ru/sockslist'
@@ -174,3 +188,17 @@ def  socks_list():
         socks_list()
 
     return p
+
+def check_http(pip):
+  for lis in pip:
+    try:
+        proxy_handler = urllib2.ProxyHandler({"http": lis})
+        opener = urllib2.build_opener(proxy_handler)
+        opener.addheaders = [
+            ("User-agent", "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.6) Gecko/2009022111 Gentoo Firefox/3.0.6")]
+        urllib2.install_opener(opener)
+        req = urllib2.Request("http://createssh.com/")
+        sock = urllib2.urlopen(req)
+        return lis
+    except:
+        http()
