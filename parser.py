@@ -112,7 +112,7 @@ def check_proxy(list,type = 'NONE'):
 
             if r.status_code == 200:
               print(i)
-              return i
+              yield i
         except requests.exceptions.ConnectionError:
              print(f'не прошло: {i} {time.ctime(time.time())}\n')
              continue
