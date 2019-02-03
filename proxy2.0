@@ -1,4 +1,4 @@
-import aiohttp
+mport aiohttp
 import asyncio
 import re
 import logging
@@ -8,12 +8,13 @@ async def request(session, url):
     async with session.get(url) as response:
         return await response.text()
         
+        
 async def pars(obj):
     soup = BeautifulSoup(obj, 'html.parser')
     res= str(soup.table)
     lis = [(i * 7) + 2 for i in range(0, 24)]
     ip = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b",res)
-    td = soup.find('table', id='tblproxy').find_all('td')
+    td = soup.find('table').find_all('td')
     a= []
     for i in lis:
         tds = td[i:i + 2]
@@ -27,7 +28,7 @@ async def pars(obj):
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        link =["http://www.gatherproxy.com/ru/sockslist"]#,"https://www.socks-proxy.net",]
+        link =["http://www.gatherproxy.com/ru/sockslist","https://www.socks-proxy.net",]
         for i in link:
          html = await request(session, i)
          q= await pars(html)
