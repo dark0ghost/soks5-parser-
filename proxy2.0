@@ -25,8 +25,11 @@ async def pars(obj):
 
 
 async def main():
+    links =["http://www.gatherproxy.com/ru/sockslist",]
+
+
     async with aiohttp.ClientSession() as session:
-        links =["http://www.gatherproxy.com/ru/sockslist","https://www.socks-proxy.net",]
+        
         for link k in links:
          html = await request(session, link)
          socks5= await pars(html)
