@@ -33,7 +33,7 @@ async def main():
         for link k in links:
          html = await request(session, link)
          socks5= await pars(html)
-         for i in soks5:
+         for i in socks5:
              yield f"socks5://{i[0]}:{i[1]}"
 
 
