@@ -30,7 +30,7 @@ async def main():
 
     async with aiohttp.ClientSession() as session:
         
-        for link k in links:
+        for link  in links:
          html = await request(session, link)
          socks5= await pars(html)
          for i in socks5:
