@@ -9,7 +9,10 @@ a = await main()
 #  change proxy type to "socks4" or "http" if you use not socks5 proxy.
 print(a)
 ```
-Result : "socks5://ip:port".
+##Result :
+```
+ "socks5://ip:port".
+```
 #
 # **Requirements**
 ```
