@@ -4,14 +4,17 @@
 # Example
 ```
 from proxy_parser import main
-a = await main()
+import asyncio 
+
+async def a():
+  a = await main()
+  print(a)
 # "type " need for getting proxy string
 #  change proxy type to "socks4" or "http" if you use not socks5 proxy.
-print(a)
 ```
 ## Result :
 ```
- "socks5://ip:port".
+List- template: "socks5://ip:port".
 ```
 #
 # **Requirements**
