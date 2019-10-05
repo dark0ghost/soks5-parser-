@@ -2,10 +2,7 @@
 
 #
 # Example
-
-```
-python
-
+```python 
 from proxy_parser import main
 import asyncio 
 
