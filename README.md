@@ -9,6 +9,7 @@ import asyncio
 async def a():
   a = await main()
   print(a)
+asyncio.run(a())
 # "type " need for getting proxy string
 #  change proxy type to "socks4" or "http" if you use not socks5 proxy.
 ```
