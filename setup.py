@@ -11,7 +11,6 @@ setup(
     author="dark0ghost",
     url='https://github.com/dark0ghost/soks5-parser/',
     packages=[
-        'aiofaceapp',
     ],
     package_dir={'proxy2_0':
                      'proxy2_0'},
