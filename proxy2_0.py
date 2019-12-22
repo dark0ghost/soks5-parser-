@@ -9,7 +9,7 @@ from typing import List, Tuple, Iterator, Any
 class Proxy:
     cache_list: List[str]
 
-    def __init__(self, session: aiohttp.ClientSession) -> None:
+    def __init__(self, session: Optional[aiohttp.ClientSession] = None) -> None:
         """
 
         @param session:
